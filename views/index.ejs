@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Website</title>
+    <style>
+
+        .blog {
+            background-color: black;
+            color: white;
+            padding: 5px 20px 20px 20px;
+            border-radius: 20px;
+            width: fit-content;
+        }
+
+        .msg {
+            background-color: rgb(31, 53, 200);
+            color: aliceblue;
+            padding: 5px 10px;
+            width: fit-content;
+            height: fit-content;
+            border-radius: 20px;
+            font-size: larger;
+        }
+
+        i {
+            color: rgb(255, 123, 0);
+            font-size: larger;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: rgb(103, 103, 233);
+            color: white;
+            font-size: medium;
+            margin: 5px;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h2 style="color: rgb(5, 84, 12);">Blog Website</h2>
+    <form action="/newBlog">
+        <button style="margin-bottom: 20px;">Create New Blog</button>
+    </form>
+
+    <% for(let blog of blogs) { %>
+        <div class="blog">
+            <p>From : <i><%= blog.from %></i></p>
+            <p class="msg"><%= blog.message %></p>
+            <p><%= blog.created_at.toString().split(" ")[4] %></p>
+            <p><%= blog.created_at.toString().split(" ").slice(0,4).join(" ") %></p>
+            <div style="display: flex">
+                <form action="/<%=blog._id%>/edit" method="get">
+                    <button>Edit</button>
+                </form>
+                <form method="POST" action="/delete/<%= blog._id %>?_method=DELETE">
+                    <button>Delete</button>
+                </form>
+            </div>
+        </div>
+        <br>
+    <% } %>
+
+</body>
+</html>
